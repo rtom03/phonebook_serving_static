@@ -1,13 +1,15 @@
+import phonebook from "./phonebook";
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const options = ":method :url :status :response-time ms - :res[content-length]";
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT || 8003;
 
 app.use(cors());
 app.use(express.json());
 app.use(cors());
+app.use(express.static("dist"));
 
 let persons = [
   {
@@ -32,7 +34,7 @@ let persons = [
   },
 ];
 
-app.get("/persons", (req, res) => {
+app.get("/api/persons", (req, res) => {
   return res.json(persons);
 });
 
